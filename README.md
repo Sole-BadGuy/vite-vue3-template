@@ -20,3 +20,4 @@
    A: 请全局安装 commitizen，命令：`npm install commitizen -g`
 
 # .cz-config.js 时配置commit - msg 中文提示
+# git Bash 里无法上下键选中选项时  可以通过数字选择 从1开始
