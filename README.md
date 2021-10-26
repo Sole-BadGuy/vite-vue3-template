@@ -21,3 +21,8 @@
 
 # .cz-config.js 时配置commit - msg 中文提示
 # git Bash 里无法上下键选中选项时  可以通过数字选择 从1开始
+# 单元测试
+  1. https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/vite-vue3/image.2pg6u5vxed40.png
+如上图，我们使用 VSCode / WebStrom / IDEA 等编辑器时，在单元测试文件中，IDE 会提示某些方法不存在（如 test、describe、it、expect等），安装 @types/jest 即可解决。
+npm i @types/jest -D
+ 2. 如果在测试文件下TS文件不能识别.vue结尾的文件 可以将src下的env.d.ts文件复制一份到根目录(会不会产生文件识别错误暂时没看到) 但是能解决这个问题
