@@ -14,6 +14,7 @@
     "baseUrl": "src",
     "paths": {
       "@/*": ["./*"], // ts路径解析@/为./src
+      "root/*": ["./*"], // ts路径解析@/为./src
     }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
