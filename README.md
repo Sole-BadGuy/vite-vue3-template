@@ -11,7 +11,7 @@
     "*.{vue,js,ts}": "eslint --fix"
   }, 行命令表示：只对 git 暂存区的 .vue、.js、.ts 文件执行 eslint --fix
 
-# Commitizen 是用与提交时规定提交格式的插件 
+# Commitizen 是用与提交时规定提交格式的插件
 
 ## Q&A
 
