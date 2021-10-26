@@ -7,8 +7,16 @@
 # lint-staged —— 在 git 暂存的文件上运行 linters
 
 # package.json下的 
-# "lint-staged": {
-#     "*.{vue,js,ts}": "eslint --fix"
-#  }, 行命令表示：只对 git 暂存区的 .vue、.js、.ts 文件执行 eslint --fix
+1. "lint-staged": {
+    "*.{vue,js,ts}": "eslint --fix"
+  }, 行命令表示：只对 git 暂存区的 .vue、.js、.ts 文件执行 eslint --fix
 
 # Commitizen 是用与提交时规定提交格式的插件
+
+## Q&A
+
+1. Q: `git cz` 不生效  
+
+   A: 请全局安装 commitizen，命令：`npm install commitizen -g`
+
+# .cz-config.js 时配置commit - msg 中文提示
