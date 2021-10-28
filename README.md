@@ -20,7 +20,7 @@
    A: 请全局安装 commitizen，命令：`npm install commitizen -g`
 
 # .cz-config.js 时配置commit - msg 中文提示
-# git Bash 里无法上下键选中选项时  可以通过数字选择 从1开始
+# git Bash 里无法上下键选中选项时  可以通过数字选择 从1开始 
 # 单元测试
   1. https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/vite-vue3/image.2pg6u5vxed40.png
 如上图，我们使用 VSCode / WebStrom / IDEA 等编辑器时，在单元测试文件中，IDE 会提示某些方法不存在（如 test、describe、it、expect等），安装 @types/jest 即可解决。
