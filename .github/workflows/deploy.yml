@@ -6,9 +6,9 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # 使用ubuntu-latest系统镜像运行自动化脚本
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2 # 下载代码仓库
 
       - name: Setup Node.js v14.x
         uses: actions/setup-node@v1
