@@ -25,6 +25,7 @@ const count = ref(0)
     Edit
     <code>components/HelloWorld.vue</code> to test hot module replacement.
   </p>
+  <h1>吴麒颖你看到了吗</h1>
 </template>
 
 <style scoped>
