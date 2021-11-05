@@ -1,50 +1,69 @@
+<!-- 登录页面 -->
 <template>
-  <div class="loading">
-    <el-form :model="formInline">
-      <el-form-item
-        label="账号"
-        :rules="[
-          { required: true, message: '账户是必填项' },
-          { type: 'number', message: '账号只能是数字' }
-        ]"
-      >
-        <el-input v-model="formInline.account"></el-input>
-      </el-form-item>
-      <el-form-item label="密码" :rules="[{ required: true, message: '密码是必填项' }]">
-        <el-input v-model="formInline.passWord"></el-input>
-      </el-form-item>
-      <el-form-item class="loadingHandle">
-        <div>
-          <el-button type="primary" plain>登录</el-button>
-          <el-button type="primary" plain>注册</el-button>
-        </div>
-        <a>忘记密码</a>
-      </el-form-item>
+  <div class="login-container">
+    <!-- 登录背景 -->
+    <video poster="../assets/video-cover.jpeg" loop autoplay muted>
+      <source src="../assets/night.mp4" />
+    </video>
+    <el-form class="login-form">
+      <div class="title-container">
+        <h3 class="title">{{ t('login.title') }}</h3>
+        <LangSelect :isWhite="true" class="set-language" />
+      </div>
     </el-form>
   </div>
 </template>
-<script lang="ts" setup>
-import { ref, Ref } from 'vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { useI18n } from 'vue-i18n'
+import LangSelect from '@/components/lang_select/Index.vue'
 
-const formInline: Ref = ref({})
+export default defineComponent({
+  components: {
+    LangSelect
+  },
+  setup() {
+    const { t } = useI18n()
+    console.log(t('login.title'))
+    return {
+      t
+    }
+  }
+})
 </script>
 
 <style scoped lang="less">
-.loading {
-  width: 600px;
-  height: 400px;
-  background-color: rgb(184, 236, 174);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 20px;
-  border-radius: 6px;
-  box-shadow: 7px 5px 10px 2px #4bb89fba, -7px -5px 10px 2px #4bb89fba;
-  .loadingHandle {
-    /deep/ .el-form-item__content {
-      display: flex;
-      justify-content: space-around;
+.login-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+  .login-form {
+    position: relative;
+    width: 520px;
+    max-width: 100%;
+    padding: 160px 35px 0;
+    margin: 0 auto;
+    overflow: hidden;
+    .title-container {
+      position: relative;
+      .title {
+        color: antiquewhite;
+        font-size: 26px;
+        margin: 0px auto 40px auto;
+        text-align: center;
+        font-weight: bold;
+      }
     }
   }
 }

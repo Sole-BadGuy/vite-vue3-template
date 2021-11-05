@@ -1,5 +1,15 @@
 import { App } from 'vue'
-import { ElIcon, ElLoading, ElCard, ElButton, ElForm, ElFormItem, ElInput } from 'element-plus'
+import {
+  ElIcon,
+  ElLoading,
+  ElCard,
+  ElButton,
+  ElForm,
+  ElFormItem,
+  ElInput,
+  ElDropdown,
+  ElDropdownItem
+} from 'element-plus'
 
 /**
  * 按需导入 Element Plus 组件
@@ -7,7 +17,17 @@ import { ElIcon, ElLoading, ElCard, ElButton, ElForm, ElFormItem, ElInput } from
  * @param app {App}
  */
 export default function styleImport(app: App) {
-  ;[ElButton, ElCard, ElLoading, ElIcon, ElForm, ElFormItem, ElInput].forEach((v) => {
+  ;[
+    ElButton,
+    ElCard,
+    ElLoading,
+    ElIcon,
+    ElForm,
+    ElFormItem,
+    ElInput,
+    ElDropdown,
+    ElDropdownItem
+  ].forEach((v) => {
     app.use(v)
   })
   return app
