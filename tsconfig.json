@@ -10,7 +10,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "types": ["vite/client", "jest"], // 消除单元测试 ts文件报红
+    "types": ["vite/client", "jest","@intlify/vite-plugin-vue-i18n/client"], // 消除单元测试 ts文件报红
     "baseUrl": "src",
     "paths": {
       "@/*": ["./*"], // ts路径解析@/为./src
