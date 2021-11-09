@@ -5,6 +5,7 @@ import router from './router/index'
 import { store } from './store'
 import loadAllPlugins from './plugins'
 import './style/basic.less'
+import '@/assets/iconfont/iconfont.css'
 import styleImport from '@/utils/style-import'
 import 'element-plus/dist/index.css'
 

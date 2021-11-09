@@ -5,18 +5,75 @@
     <video poster="../assets/video-cover.jpeg" loop autoplay muted>
       <source src="../assets/night.mp4" />
     </video>
-    <el-form class="login-form">
+    <el-form class="login-form" :model="loginForm" ref="loginFormRef">
       <div class="title-container">
         <h3 class="title">{{ t('login.title') }}</h3>
         <LangSelect :isWhite="true" class="set-language" />
+      </div>
+      <el-form-item
+        prop="username"
+        :rules="[
+          {
+            required: true,
+            message: '请输入账号',
+            trigger: 'blur'
+          }
+        ]"
+      >
+        <span class="svg-container">
+          <i class="el-icon-user" />
+        </span>
+        <el-input
+          name="username"
+          type="text"
+          v-model="loginForm.username"
+          :placeholder="t('login.username')"
+          tabindex="1"
+          autocomplete="on"
+        />
+      </el-form-item>
+      <el-form-item
+        prop="password"
+        :rules="[
+          {
+            required: true,
+            message: '请输入密码',
+            trigger: 'blur'
+          },
+          {
+            validator: validateUsername,
+            trigger: 'blur'
+          }
+        ]"
+      >
+        <span class="svg-container">
+          <i class="el-icon-lock" />
+        </span>
+        <el-input
+          name="password"
+          type="password"
+          v-model="loginForm.password"
+          :placeholder="t('login.username')"
+        />
+      </el-form-item>
+      <el-button class="loginBtn" type="primary" :loading="loading" @click.prevent="handleLogin">
+        {{ t('login.logIn') }}
+      </el-button>
+      <div class="registerBtn">
+        <a @click.prevent="handleRegister">
+          {{ t('login.register') }}
+        </a>
       </div>
     </el-form>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, reactive, toRefs, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
+import { useStore } from '@/store'
 import LangSelect from '@/components/lang_select/Index.vue'
+import { UserActionTypes } from '@/store/modules/user/action-types'
 
 export default defineComponent({
   components: {
@@ -24,9 +81,62 @@ export default defineComponent({
   },
   setup() {
     const { t } = useI18n()
-    console.log(t('login.title'))
+    const loginFormRef = ref(null)
+    const store = useStore()
+    const router = useRouter()
+    // const route = useRoute()
+    // 账号密码
+    const state = reactive({
+      loginForm: {
+        username: 'admin',
+        password: '88888888'
+      },
+      loading: false,
+      redirect: '',
+      otherQuery: {}
+    })
+    const methods = reactive({
+      // 登录验证
+      validateUsername: (rule: any, value: string, callback: Function) => {
+        // 不为空
+        if (value.trim().length < 11) {
+          callback(new Error('账号长度为11位'))
+        } else {
+          callback()
+        }
+      },
+      // 登录事件
+      handleLogin: () => {
+        ;(loginFormRef.value as any).validate(async (valid: Boolean) => {
+          if (valid) {
+            state.loading = true
+            // 请求后台拿到登录态
+            await store.dispatch(UserActionTypes.ACTION_LOGIN, state.loginForm)
+            state.loading = false
+            // 跳转到首页
+            router
+              .push({
+                path: state.redirect || '/',
+                query: state.otherQuery
+              })
+              .catch((err: any) => {
+                console.warn(err)
+              })
+            return true
+          }
+          return false
+        })
+      },
+      // 去注册
+      handleRegister: () => {
+        console.log('注册')
+      }
+    })
     return {
-      t
+      t,
+      ...toRefs(state),
+      ...toRefs(methods),
+      loginFormRef
     }
   }
 })
@@ -48,6 +158,26 @@ export default defineComponent({
     object-fit: cover;
     z-index: -1;
   }
+  :deep(.el-form-item__content) {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    color: #454545;
+    .el-input {
+      display: inline-block;
+      width: 85%;
+      height: 47px;
+      input {
+        height: 47px;
+        background-color: transparent;
+        color: rgb(255, 255, 255);
+        border: 0px;
+        border-radius: 0px;
+        padding: 12px 5px 12px 15px;
+        -webkit-appearance: none;
+      }
+    }
+  }
   .login-form {
     position: relative;
     width: 520px;
@@ -65,6 +195,30 @@ export default defineComponent({
         font-weight: bold;
       }
     }
+    .set-language {
+      color: #fff;
+      position: absolute;
+      top: 16px;
+      font-size: 18px;
+      right: 0px;
+      cursor: pointer;
+    }
   }
+}
+.svg-container {
+  padding: 6px 5px 6px 15px;
+  vertical-align: middle;
+  color: #889aa4;
+  width: 15px;
+  display: inline-block;
+}
+.loginBtn {
+  width: 100%;
+}
+.registerBtn {
+  font-size: 16px;
+  color: rgb(224, 248, 6);
+  text-align: right;
+  margin-top: 15px;
 }
 </style>

@@ -9,7 +9,7 @@
   <div>
     <el-dropdown>
       <svg class="icon" aria-hidden="true" font-size="20px" :class="{ 'svg-color': isWhite }">
-        <use xlink:href="#iconlanguage" />
+        <use xlink:href="#icon-zhongyingwenqiehuan" />
       </svg>
       <template #dropdown>
         <el-dropdown-menu>
@@ -28,9 +28,9 @@
 
 <script lang="ts">
 import { computed, defineComponent, reactive, toRefs } from 'vue'
-// import { AppActionTypes } from '@/store/modules/app/action-types'
 import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
+import { AppActionTypes } from '@/store/modules/app/action-types'
 import { useStore } from '@/store'
 
 type Language = {
@@ -55,11 +55,10 @@ export default defineComponent({
       ] as Array<Language>,
       // 改变语言
       handleSetLanguage: (lang: string) => {
-        console.log(lang)
         locale.value = lang
-        // store.dispatch(AppActionTypes.ACTION_SET_LANGUAGE, lang)
+        store.dispatch(AppActionTypes.ACTION_SET_LANGUAGE, lang)
         ElMessage({
-          message: '恭喜您已经更新语言成功',
+          message: `语言以切换为:${lang}`,
           type: 'success'
         })
       }

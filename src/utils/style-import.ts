@@ -8,7 +8,9 @@ import {
   ElFormItem,
   ElInput,
   ElDropdown,
-  ElDropdownItem
+  ElDropdownItem,
+  ElTooltip,
+  ElMessage
 } from 'element-plus'
 
 /**
@@ -26,7 +28,9 @@ export default function styleImport(app: App) {
     ElFormItem,
     ElInput,
     ElDropdown,
-    ElDropdownItem
+    ElDropdownItem,
+    ElTooltip,
+    ElMessage
   ].forEach((v) => {
     app.use(v)
   })
