@@ -20,7 +20,7 @@ const _header: Headers = {
 }
 
 export interface NetworkConfig {
-  host?: string | boolean
+  host?: string
   timeout?: number
   loading?: false
   errorShowType?: InfoShowType
@@ -28,7 +28,7 @@ export interface NetworkConfig {
 }
 
 const networkConfig: NetworkConfig = {
-  host: import.meta.env.VITE_APP_BASE_URL,
+  host: import.meta.env.VITE_APP_BASE_URL as string | undefined,
   timeout: 10000,
   loading: false,
   errorShowType: InfoShowType.LOG,

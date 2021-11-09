@@ -176,6 +176,18 @@ export default defineComponent({
         padding: 12px 5px 12px 15px;
         -webkit-appearance: none;
       }
+      // 设置输入框自动填充的延迟属性
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active {
+        -webkit-transition-delay: 99999s;
+        -webkit-transition: color 99999s ease-out, background-color 99999s ease-out;
+      }
+      // 设置填充色为透明
+      input:-webkit-autofill {
+        box-shadow: 0 0 0 1000px transparent inset !important;
+      }
     }
   }
   .login-form {
