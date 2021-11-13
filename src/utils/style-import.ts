@@ -10,9 +10,16 @@ import {
   ElDropdown,
   ElDropdownItem,
   ElTooltip,
-  ElMessage
+  ElMessage,
+  ElScrollbar,
+  ElMenu,
+  ElSubMenu,
+  ElDrawer,
+  ElSwitch,
+  ElColorPicker,
+  ElBreadcrumb,
+  ElBreadcrumbItem
 } from 'element-plus'
-
 /**
  * 按需导入 Element Plus 组件
  * Vite 插件 https://github.com/element-plus/vite-plugin-element-plus
@@ -30,7 +37,15 @@ export default function styleImport(app: App) {
     ElDropdown,
     ElDropdownItem,
     ElTooltip,
-    ElMessage
+    ElMessage,
+    ElScrollbar,
+    ElMenu,
+    ElSubMenu,
+    ElDrawer,
+    ElSwitch,
+    ElColorPicker,
+    ElBreadcrumb,
+    ElBreadcrumbItem
   ].forEach((v) => {
     app.use(v)
   })

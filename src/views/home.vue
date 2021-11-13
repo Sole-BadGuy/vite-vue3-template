@@ -68,9 +68,9 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, toRefs, ref } from 'vue'
+import { defineComponent, reactive, toRefs, ref, watch, onMounted, watchEffect } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useRouter } from 'vue-router'
+import { useRouter, LocationQuery, useRoute } from 'vue-router'
 import { useStore } from '@/store'
 import LangSelect from '@/components/lang_select/Index.vue'
 import { UserActionTypes } from '@/store/modules/user/action-types'
@@ -84,12 +84,12 @@ export default defineComponent({
     const loginFormRef = ref(null)
     const store = useStore()
     const router = useRouter()
-    // const route = useRoute()
+    const route = useRoute()
     // 账号密码
     const state = reactive({
       loginForm: {
         username: 'admin',
-        password: '88888888'
+        password: '8888888888888'
       },
       loading: false,
       redirect: '',
@@ -113,6 +113,7 @@ export default defineComponent({
             // 请求后台拿到登录态
             await store.dispatch(UserActionTypes.ACTION_LOGIN, state.loginForm)
             state.loading = false
+            console.log(state.redirect)
             // 跳转到首页
             router
               .push({
@@ -128,10 +129,39 @@ export default defineComponent({
         })
       },
       // 去注册
-      handleRegister: () => {
-        console.log('注册')
-      }
+      handleRegister: () => {}
     })
+    function getOtherQuery(query: LocationQuery) {
+      return Object.keys(query).reduce((acc, cur) => {
+        const newacc = acc
+        if (cur !== 'redirect') {
+          newacc[cur] = query[cur]
+        }
+        return newacc
+      }, {} as LocationQuery)
+    }
+    watch(
+      () => route.query,
+      (query) => {
+        if (query) {
+          state.redirect = query.redirect?.toString() ?? ''
+          state.otherQuery = getOtherQuery(query)
+        }
+      },
+      {
+        deep: true
+      }
+    )
+
+    console.log('我白泥湖', state.redirect)
+
+    // 挂载
+    onMounted(() => {
+      console.log('onMounted')
+    })
+    // 类似与react的useEffect
+    const stop = watchEffect(() => {}, {})
+    stop()
     return {
       t,
       ...toRefs(state),

@@ -8,12 +8,7 @@ import { createApp } from 'vue'
 export default function loadAllPlugins(app: ReturnType<typeof createApp>) {
   // viti 批量导入文件
   const files: any = import.meta.globEager('./*.ts')
-  const filesKeys = []
-  // eslint-disable-next-line no-restricted-syntax
-  for (const key in files) {
-    filesKeys.push(key)
-  }
-  filesKeys.forEach((key: string | number | symbol) => {
+  Object.keys(files).forEach((key: string | number | symbol) => {
     if (typeof files[key].default === 'function') {
       if (key !== './index.ts') files[key].default(app)
     }

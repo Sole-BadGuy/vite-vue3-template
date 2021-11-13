@@ -37,7 +37,9 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': ['error'],
     // ts 文件中eslit枚举校验过不去 使用ts校验
     'no-shadow': 'off',
-    '@typescript-eslint/no-shadow': ['error']
+    '@typescript-eslint/no-shadow': ['error'],
+    // 规定数组不强制解构赋值
+    'prefer-destructuring': ['error', { object: true, array: false }]
   },
   settings: {}
 }
