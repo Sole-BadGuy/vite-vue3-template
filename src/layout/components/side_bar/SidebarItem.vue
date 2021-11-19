@@ -5,7 +5,10 @@
   <div v-if="!item.meta || !item.meta.hidden" :class="[isCollapse ? 'simple-mode' : 'full-mode']">
     <template v-if="!alwaysShowRootMenu && theOnlyOneChild && !theOnlyOneChild.children">
       <!-- 一级菜单 -->
-      <SidebarItemLink v-if="theOnlyOneChild.meta" :to="resolvePath(theOnlyOneChild.path)">
+      <SidebarItemLink
+        v-if="theOnlyOneChild.meta && theOnlyOneChild.meta.title"
+        :to="resolvePath(theOnlyOneChild.path)"
+      >
         <el-menu-item :index="resolvePath(theOnlyOneChild.path)">
           <svg v-if="theOnlyOneChild.meta.icon" class="icon" aria-hidden="true" font-size="17px">
             <use :xlink:href="theOnlyOneChild.meta.icon" />
@@ -70,7 +73,6 @@ export default defineComponent({
     SidebarItemLink
   },
   setup(props) {
-    console.log(props.item)
     // 如果存在meta并且alwaysShow属性存在就表示是二级菜单
     const alwaysShowRootMenu = computed(() => {
       if (props.item.meta && props.item.meta.alwaysShow) {
@@ -99,15 +101,19 @@ export default defineComponent({
       }
       // 如果有子项 并且子项不隐藏
       if (props.item.children) {
-        props.item.children.forEach((child) => {
+        let theOnlyOneChildObj = Object as unknown as RouteRecordRaw
+        props.item.children.some((child) => {
           // 这里暂时没有想到好的方法 用于规避路由是一级页面时 地址栏中路径为 '/path'
           // 菜单的index为'path'它俩不相等导致选中时不能渲染菜单选中后的样式
           // 这里为了解决它 在path不是以/开头时为它添加/
-          if ((!child.meta || !child.meta.hidden) && child.path === '/') {
-            return child
+          if (!child.meta || !child.meta.hidden) {
+            theOnlyOneChildObj = child
+            return true
           }
-          return { ...child, path: `/${child.path}` }
+          theOnlyOneChildObj = { ...child, path: `/${child.path}` }
+          return true
         })
+        return { ...theOnlyOneChildObj }
       }
       return { ...props.item, path: '' }
     })
@@ -117,6 +123,10 @@ export default defineComponent({
           return `${props.basePath}/${routePath}`
         }
         return `${props.basePath}`
+      }
+      // 确保地址栏跟可点击菜单地址相同
+      if (routePath.split('')[0] !== '/') {
+        return `/${routePath}`
       }
       return `${routePath}`
     }

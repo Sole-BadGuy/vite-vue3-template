@@ -225,15 +225,17 @@ export default defineComponent({
     // 重新调整路由结构，使其看起来与边栏相同
     const getReshapeRoutes = (routes: RouteRecordRaw[], basePath?: string) => {
       const reshapeRoutes: RouteRecordRaw[] = []
+      console.log(routes)
       routes.forEach((route) => {
         let newRoute = route
         // 跳过隐藏路线
-        if (!newRoute.meta) {
+        if (newRoute.meta) {
           const onlyOneShowingChild = onlyOneShowingChildFunc(newRoute.children, newRoute)
           if (newRoute.children && onlyOneShowingChild) {
             newRoute = onlyOneShowingChild
           }
           if (newRoute.meta && newRoute.meta.title) {
+            console.log(newRoute)
             let path: String = `${basePath || ''}/${newRoute.path}`
             if (newRoute.children) {
               path = `${newRoute.path}`
@@ -256,8 +258,8 @@ export default defineComponent({
     }
 
     const generateTreeData = (routes: RouteRecordRaw[]) => {
-      console.log(routes)
       const data: RoutesTreeData[] = []
+      console.log(routes)
       routes.forEach((route) => {
         const tmp: RoutesTreeData = {
           children: [],

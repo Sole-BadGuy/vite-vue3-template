@@ -43,7 +43,6 @@ export const actions: ActionTree<UserState, RootState> & Actions = {
     username = username.trim()
     await loginRequest({ username, password })
       .then(async (res: any) => {
-        console.log(res)
         if (res?.code === '0000' && res.data.accessToken) {
           // 把获取的token存到cookie里
           setToken(res.data.accessToken)

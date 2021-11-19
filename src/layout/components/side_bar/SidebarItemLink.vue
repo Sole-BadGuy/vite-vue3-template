@@ -22,6 +22,7 @@ export default defineComponent({
   setup(props) {
     const router = useRouter()
     const push = () => {
+      console.log(props.to)
       // 测试是否是以/开头如果是就正常跳转否则就是在最前面加一个/
       if (props.to.split('')[0] === '/') {
         router.push(props.to)

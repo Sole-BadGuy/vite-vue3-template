@@ -59,16 +59,11 @@
       <el-button class="loginBtn" type="primary" :loading="loading" @click.prevent="handleLogin">
         {{ t('login.logIn') }}
       </el-button>
-      <div class="registerBtn">
-        <a @click.prevent="handleRegister">
-          {{ t('login.register') }}
-        </a>
-      </div>
     </el-form>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, toRefs, ref, watch, onMounted, watchEffect } from 'vue'
+import { defineComponent, reactive, toRefs, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter, LocationQuery, useRoute } from 'vue-router'
 import { useStore } from '@/store'
@@ -113,7 +108,6 @@ export default defineComponent({
             // 请求后台拿到登录态
             await store.dispatch(UserActionTypes.ACTION_LOGIN, state.loginForm)
             state.loading = false
-            console.log(state.redirect)
             // 跳转到首页
             router
               .push({
@@ -127,9 +121,7 @@ export default defineComponent({
           }
           return false
         })
-      },
-      // 去注册
-      handleRegister: () => {}
+      }
     })
     function getOtherQuery(query: LocationQuery) {
       return Object.keys(query).reduce((acc, cur) => {
@@ -149,19 +141,10 @@ export default defineComponent({
         }
       },
       {
-        deep: true
+        deep: true,
+        immediate: true
       }
     )
-
-    console.log('我白泥湖', state.redirect)
-
-    // 挂载
-    onMounted(() => {
-      console.log('onMounted')
-    })
-    // 类似与react的useEffect
-    const stop = watchEffect(() => {}, {})
-    stop()
     return {
       t,
       ...toRefs(state),

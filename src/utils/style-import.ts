@@ -18,7 +18,14 @@ import {
   ElSwitch,
   ElColorPicker,
   ElBreadcrumb,
-  ElBreadcrumbItem
+  ElBreadcrumbItem,
+  ElTable,
+  ElTableColumn,
+  ElPopconfirm,
+  ElDialog,
+  ElTree,
+  ElCheckbox,
+  ElCheckboxGroup
 } from 'element-plus'
 /**
  * 按需导入 Element Plus 组件
@@ -45,7 +52,14 @@ export default function styleImport(app: App) {
     ElSwitch,
     ElColorPicker,
     ElBreadcrumb,
-    ElBreadcrumbItem
+    ElBreadcrumbItem,
+    ElTable,
+    ElTableColumn,
+    ElPopconfirm,
+    ElDialog,
+    ElTree,
+    ElCheckbox,
+    ElCheckboxGroup
   ].forEach((v) => {
     app.use(v)
   })
