@@ -1,0 +1,1 @@
+import{g as t,x as n,u as r}from"./vendor.a62b2750.js";const p=t({created(){const{params:e,query:a}=n(),{path:o}=e;r().replace({path:`/${o}`,query:a}).catch(s=>{console.warn(s)})}});export{p as default};
