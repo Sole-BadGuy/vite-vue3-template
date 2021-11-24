@@ -28,6 +28,9 @@ export const mutations: MutationTree<SettingsState> & Mutations = {
       case 'sidebarTextTheme':
         state.sidebarTextTheme = value
         break
+      case 'theme':
+        state.theme = value
+        break
       default:
         break
     }

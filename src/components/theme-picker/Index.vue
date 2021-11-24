@@ -36,7 +36,7 @@ export default defineComponent({
     const ctx = getCurrentInstance() as any
     const state = reactive({
       chalk: '',
-      theme: store.state.settings.theme
+      theme: store.state.settings.theme // 默认颜色
     })
 
     const defaultTheme = computed(() => {
@@ -110,7 +110,7 @@ export default defineComponent({
           let originalCluster = getThemeCluster(oldValue.replace('#', ''))
           const loadingInstance = loading(t('theme.loading'))
           if (!state.chalk) {
-            const url = `https://unpkg.com/element-plus@${version}/lib/theme-chalk/index.css`
+            const url = `https://unpkg.com/element-plus@${version}/theme-chalk/index.css`
             await getCSSString(url, 'chalk')
           }
           const getHandler = (variable: string, id: string) => {
@@ -133,7 +133,7 @@ export default defineComponent({
           let styles: HTMLElement[] = [].slice.call(document.querySelectorAll('style'))
           styles = styles.filter((style) => {
             const text = style.innerText
-            return new RegExp(oldValue, 'i').test(text) && !/Chalk Variables/.test(text)
+            return new RegExp(oldValue as any, 'i').test(text) && !/Chalk Variables/.test(text)
           })
           styles.forEach((style, index) => {
             const { innerText } = style

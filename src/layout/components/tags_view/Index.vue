@@ -158,6 +158,7 @@ export default defineComponent({
     const visitedViews = computed(() => {
       return store.state.tagViews.visitedViews
     })
+    console.log(visitedViews.value)
     const routes = computed(() => store.state.permission.routes)
 
     const filterAffixTags = (routesAffix: RouteRecordRaw[], basePath = '/') => {
@@ -193,8 +194,9 @@ export default defineComponent({
       })
     }
 
+    // 添加标签
     const addTags = () => {
-      if (currentRoute.name) {
+      if (currentRoute.name && currentRoute.name !== 'Login') {
         store.dispatch(TagsActionTypes.ACTION_ADD_VIEW, currentRoute)
       }
       return false
@@ -206,15 +208,17 @@ export default defineComponent({
         if (tags === null || tags === undefined) {
           return
         }
-        tags.forEach((tag) => {
-          if ((tag.to as TagView).path === currentRoute.path) {
-            ;(scrollPaneRef.value as any).moveToCurrentTag(tag)
-            // 当查询是不同的，然后更新
-            if ((tag.to as TagView).fullPath !== currentRoute.fullPath) {
-              store.dispatch(TagsActionTypes.ACTION_UPDATE_VISITED_VIEW, currentRoute)
+        if (tags.forEach) {
+          tags.forEach((tag) => {
+            if ((tag.to as TagView).path === currentRoute.path) {
+              ;(scrollPaneRef.value as any).moveToCurrentTag(tag)
+              // 当查询是不同的，然后更新
+              if ((tag.to as TagView).fullPath !== currentRoute.fullPath) {
+                store.dispatch(TagsActionTypes.ACTION_UPDATE_VISITED_VIEW, currentRoute)
+              }
             }
-          }
-        })
+          })
+        }
       })
     }
 

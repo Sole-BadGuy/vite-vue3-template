@@ -49,10 +49,11 @@ export default defineComponent({
     const routes = computed(() => {
       return store.state.permission.routes
     })
+    // 是否显示logo
     const showLogo = computed(() => {
-      return true
+      return store.state.settings.showSidebarLogo
     })
-
+    console.log(showLogo.value)
     const menuActiveTextColor = computed(() => {
       if (store.state.settings.sidebarTextTheme) {
         return store.state.settings.theme
@@ -118,7 +119,7 @@ export default defineComponent({
 
 .has-logo {
   .el-scrollbar {
-    height: calc(100% - 50px);
+    // height: calc(100% - 50px);
   }
 }
 

@@ -6,7 +6,8 @@
     "debug:boss": "vite --mode bossdevelopment",
     "debug:site": "vite --mode sitedevelopment",
     "debug:designer": "vite --mode designerdevelopment",
-    "build": "cross-env vite build --mode sitedevelopment",
+    "build:site": "cross-env vite build --mode sitedevelopment",
+    "build:boss": "cross-env vite build --mode bossdevelopment",
     "serve": "vite preview",
     "prepare": "husky install",
     "test": "jest"

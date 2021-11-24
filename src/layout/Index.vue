@@ -136,7 +136,7 @@ export default defineComponent({
 .main-container {
   min-height: 100%;
   transition: margin-left 0.28s;
-  margin-left: 300px;
+  padding-left: 300px;
   position: relative;
 }
 
@@ -159,6 +159,9 @@ export default defineComponent({
   right: 0;
   z-index: 9;
   transition: width 0.28s;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 300px;
 }
 
 .hideSidebar {

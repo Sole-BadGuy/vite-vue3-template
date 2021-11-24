@@ -115,7 +115,7 @@ import { RouteRecordRaw } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { cloneDeep } from 'lodash'
 import { ElMessage } from 'element-plus'
-import { allRoute } from '@/router'
+import { allRoutes } from '@/router'
 import { getRoutes, getRoles, delRole, updateRole, createRole } from '@/apis/roles'
 
 export default defineComponent({
@@ -225,7 +225,6 @@ export default defineComponent({
     // 重新调整路由结构，使其看起来与边栏相同
     const getReshapeRoutes = (routes: RouteRecordRaw[], basePath?: string) => {
       const reshapeRoutes: RouteRecordRaw[] = []
-      console.log(routes)
       routes.forEach((route) => {
         let newRoute = route
         // 跳过隐藏路线
@@ -259,7 +258,6 @@ export default defineComponent({
 
     const generateTreeData = (routes: RouteRecordRaw[]) => {
       const data: RoutesTreeData[] = []
-      console.log(routes)
       routes.forEach((route) => {
         const tmp: RoutesTreeData = {
           children: [],
@@ -340,7 +338,7 @@ export default defineComponent({
     const getServiceRoutes = () => {
       getRoutes().then((res) => {
         state.serviceRoutes = res?.data.routes as any as RouteRecordRaw[]
-        state.reshapedRoutes = getReshapeRoutes(allRoute as any as RouteRecordRaw[])
+        state.reshapedRoutes = getReshapeRoutes(allRoutes as any as RouteRecordRaw[])
       })
     }
 
@@ -368,7 +366,7 @@ export default defineComponent({
       }
       state.dialogType = 'new'
       state.dialogVisible = true
-      otherRoles(allRoute as RouteRecordRaw[])
+      otherRoles(allRoutes as RouteRecordRaw[])
       TreeChangeHandel()
     }
 
@@ -379,7 +377,7 @@ export default defineComponent({
       // 深拷贝
       state.role = cloneDeep(scope.row)
       // 遍历得到所有以选项
-      otherRoles(allRoute as RouteRecordRaw[])
+      otherRoles(allRoutes as RouteRecordRaw[])
       nextTick(() => {
         const tree = treeRef.value as any
         // 选中对应的页面权限 这里就算后台返回的比页面路由多也不会多渲染
