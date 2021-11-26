@@ -3,9 +3,9 @@
  */
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-// import { useI18n } from 'vue-i18n'
 import { RouteLocationNormalized } from 'vue-router'
 import { ElMessage } from 'element-plus'
+import i18n from './locales'
 import router from '@/router'
 import { useStore } from './store'
 import { UserActionTypes } from './store/modules/user/action-types'
@@ -59,6 +59,12 @@ router.beforeEach(async (to: RouteLocationNormalized, _: RouteLocationNormalized
   }
 })
 
-router.afterEach(() => {
+router.afterEach((to: RouteLocationNormalized) => {
+  if (to.meta.title) {
+    document.title = i18n.global.t(`route.${to.meta.title as string}`)
+  } else {
+    document.title = i18n.global.t(`route.${to.name as string}`)
+  }
+
   NProgress.done()
 })

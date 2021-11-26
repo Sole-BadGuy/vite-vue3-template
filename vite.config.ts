@@ -5,6 +5,7 @@ import vueI18n from '@intlify/vite-plugin-vue-i18n'
 // 如果编辑器提示 path 模块找不到，则可以安装一下 @types/node -> npm i @types/node -D
 import { resolve } from 'path'
 import compressPlugin from 'vite-plugin-compression'
+// import { configHtmlPlugin } from './src/vite/plugin/html'
 import generateZip from './src/utils/zip'
 
 export default ({ mode }: ConfigEnv): UserConfig => {
@@ -24,6 +25,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
           generateZip(VITE_APP_PORT)
         }
       })
+      // configHtmlPlugin(VITE_GLOB_APP_TITLE, true)
     ],
     resolve: {
       alias: [

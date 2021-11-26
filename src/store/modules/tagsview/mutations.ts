@@ -16,8 +16,6 @@ export type Mutations<S = TagsViewState> = {
 
 export const mutations: MutationTree<TagsViewState> & Mutations = {
   [TagsMutationTypes.ADD_VISITED_VIEW](state: TagsViewState, view: TagView) {
-    console.log('我是mutations', view.name)
-    console.log(state.visitedViews)
     if (state.visitedViews.some((v) => v.path === view.path)) return
     state.visitedViews.push({ ...view, title: view.meta?.title || 'no-name' })
   },

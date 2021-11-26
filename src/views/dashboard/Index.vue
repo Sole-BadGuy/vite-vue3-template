@@ -5,8 +5,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeMount, ref } from 'vue'
-import { useStore } from '@/store'
+import { defineComponent, ref } from 'vue'
 import AdminDashboard from './admin/Index.vue'
 import EditorDashboard from './editor/Index.vue'
 
@@ -16,16 +15,15 @@ export default defineComponent({
     EditorDashboard
   },
   setup() {
-    const store = useStore()
     const currentRole = ref('AdminDashboard')
-    const roles = computed(() => {
-      return store.state.user.roles
-    })
-    onBeforeMount(() => {
-      if (!roles.value.includes('admin')) {
-        currentRole.value = 'EditorDashboard'
-      }
-    })
+    // const roles = computed(() => {
+    //   return store.state.user.roles
+    // })
+    // onBeforeMount(() => {
+    //   if (!roles.value.includes('admin')) {
+    //     currentRole.value = 'EditorDashboard'
+    //   }
+    // })
     return {
       currentRole
     }

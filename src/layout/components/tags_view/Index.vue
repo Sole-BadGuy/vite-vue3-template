@@ -158,7 +158,6 @@ export default defineComponent({
     const visitedViews = computed(() => {
       return store.state.tagViews.visitedViews
     })
-    console.log(visitedViews.value)
     const routes = computed(() => store.state.permission.routes)
 
     const filterAffixTags = (routesAffix: RouteRecordRaw[], basePath = '/') => {

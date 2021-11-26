@@ -24,7 +24,6 @@ export default function generateZip(VITE_APP_PORT: String) {
   const now = moment().format('YYYYMMDDHHmm')
   const zip = new JSZip()
   const sourceDir = path.join(__dirname, '../../dist')
-  console.log(sourceDir)
 
   readDir(zip, sourceDir)
   zip
@@ -38,7 +37,6 @@ export default function generateZip(VITE_APP_PORT: String) {
     })
     .then((content) => {
       const dest = path.join(__dirname, '../../zip')
-      console.log(dest)
       // 删除旧包目录
       // zip.remove(dest)
       // 创建新包目录

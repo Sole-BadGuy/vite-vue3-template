@@ -1,7 +1,6 @@
 <!--
   编辑权限主页
 -->
-
 <template>
   <div class="dashboard-editor-container">编辑权限主页</div>
 </template>

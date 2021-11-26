@@ -228,13 +228,12 @@ export default defineComponent({
       routes.forEach((route) => {
         let newRoute = route
         // 跳过隐藏路线
-        if (newRoute.meta) {
+        if (newRoute) {
           const onlyOneShowingChild = onlyOneShowingChildFunc(newRoute.children, newRoute)
           if (newRoute.children && onlyOneShowingChild) {
             newRoute = onlyOneShowingChild
           }
           if (newRoute.meta && newRoute.meta.title) {
-            console.log(newRoute)
             let path: String = `${basePath || ''}/${newRoute.path}`
             if (newRoute.children) {
               path = `${newRoute.path}`

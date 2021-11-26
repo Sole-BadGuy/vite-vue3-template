@@ -19,7 +19,7 @@ export default defineComponent({
     const store = useStore()
     const route = useRoute()
     const cachedViews = () => {
-      return store.state.tagViews.cachedViews
+      return store.state.tagViews.cachedViews as string[]
     }
     const key = () => {
       return route.path

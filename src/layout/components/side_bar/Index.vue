@@ -53,7 +53,6 @@ export default defineComponent({
     const showLogo = computed(() => {
       return store.state.settings.showSidebarLogo
     })
-    console.log(showLogo.value)
     const menuActiveTextColor = computed(() => {
       if (store.state.settings.sidebarTextTheme) {
         return store.state.settings.theme

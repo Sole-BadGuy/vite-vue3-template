@@ -30,6 +30,23 @@ const ExampleRouter: Array<RouteRecordRaw> = [
         }
       }
     ]
+  },
+  {
+    path: '/:path(.*)*',
+    component: Layout,
+    redirect: '404',
+    meta: { hidden: true },
+    children: [
+      {
+        path: '404',
+        component: () => import('@/views/error-page/404.vue'),
+        name: 'Page404',
+        meta: {
+          title: 'page404',
+          noCache: true
+        }
+      }
+    ]
   }
 ]
 
